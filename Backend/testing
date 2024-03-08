@@ -1,0 +1,6 @@
+addEnseignant({
+    nom:'Boudihir',
+    prenom:'Elarbi',
+    email:'e.boudihir@esi-sba.dz',
+    Modules:[]
+});
