@@ -6,7 +6,9 @@ import Password from './password.jsx'
 import Codepin from './codepin.jsx'
 import New from './newpsw'
 import './index.css'
-import Home from './homepage.jsx';
+import { EtudiantHome } from './EtudiantHome.jsx';
+import { ProfHome } from './ProfHome.jsx';
+import { AdminHome } from './AdminHome.jsx';
 
 
 const router = createBrowserRouter([
@@ -27,8 +29,15 @@ const router = createBrowserRouter([
     element: <Password />,
   },
   {
-    path: "/home",
-    element: <Home />,
+    path: "/EtudiantHome",
+    element: <EtudiantHome />,
+  },
+  {
+    path: "/ProfHome",
+    element: <ProfHome />,
+  },{
+    path: "/AdminHome",
+    element: <AdminHome />,
   },
 ]);
 

@@ -1,6 +1,6 @@
 require('dotenv').config();
 const express = require('express');
-// express app
+const cors = require('cors'); // Added CORS middleware
 const app = express();
 const homePage = require('./routers/enseignant');
 const authRoute = require('./routers/authRouter');
@@ -11,29 +11,25 @@ const authController = require('./Controllers/Auth');
 const moduleController = require('./Controllers/Module')
 const ensController = require('./Controllers/Enseignant');
 const { ObjectId } = require('mongodb');
-//const router = require('./routers/login');
 
-// middleware
+// Middleware
 app.use(express.json());
+app.use(cors()); // Use CORS middleware
 
+app.use((req, res, next) => {
+  console.log(req.path, req.method);
+  next();
+});
 
-  app.use((req, res, next) => {
-    console.log(req.path, req.method);
-    next();
-  });
+// Routes
+app.use("/auth", authRoute);
+app.use("/homePage", homePage);
 
-//routes 
-app.use("/auth" , authRoute);
-app.use("/homePage" , homePage);
-
-
-// connect to db 
+// Connect to the database
 connectDB();
-
-
 
 const PORT = process.env.PORT;
 app.listen(PORT, () => {
-    console.log(`Server is running on port ${PORT}`);
+  console.log(`Server is running on port ${PORT}`);
 });
-module.exports = authRoute ;
+module.exports = authRoute;
