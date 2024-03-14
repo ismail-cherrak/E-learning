@@ -23,8 +23,8 @@ function Password() {
     };
 
     return (
-        <div className="grid grid-cols-3">
-            <div className="col-span-1 h-screen flex flex-col items-center justify-center">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
+            <div className="col-span-1 md:col-span-1 lg:col-span-1 h-screen flex flex-col items-center justify-center">
                 <div>
                     <img src={Logo} className="m-4" alt="Logo" />
                 </div>
@@ -35,7 +35,7 @@ function Password() {
                     </p>
                 </div>
                 <input
-                    className="border border-gray-800 focus:outline-none m-2 rounded-md w-72 h-10 pl-4 placeholder-gray-600 placeholder:font-lexend text-black font-lexend"
+                    className="border border-gray-800 focus:outline-none m-2 rounded-md w-72 md:w-full lg:w-72 h-10 pl-4 placeholder-gray-600 placeholder:font-lexend text-black font-lexend"
                     placeholder="Email"
                     type="email"
                     value={email}
@@ -43,14 +43,14 @@ function Password() {
                 />
                 {errorMessage && <div className="text-red-600">{errorMessage}</div>}
                 <button
-                    className="border border-blue-950 bg-blue-950 m-2 text-white rounded-md w-72 h-10 font-lexend font-semibold active:scale-[.98]"
+                    className="border border-blue-950 bg-blue-950 m-2 text-white rounded-md w-72 md:w-full lg:w-72 h-10 font-lexend font-semibold active:scale-[.98]"
                     onClick={handleSendCode}
                     type="button"
                 >
                     Envoyer
                 </button>
             </div>
-            <div className="col-span-2 h-screen bg-white">
+            <div className="col-span-1 md:col-span-1 lg:col-span-2 h-screen bg-white hidden sm:block md:block">
                 <img src={Image} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
             </div>
         </div>

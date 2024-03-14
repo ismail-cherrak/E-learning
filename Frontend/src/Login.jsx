@@ -51,8 +51,8 @@ export const Login = () => {
     }, []);
 
     return (
-        <div className="grid grid-cols-3">
-            <div className="col-span-1 h-screen flex flex-col items-center justify-center">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
+            <div className="col-span-1 md:col-span-1 lg:col-span-1 h-screen flex flex-col items-center justify-center">
                 <h1 className="text-blue-950 text-4xl font-pacifico font-semibold m-2 ">BIENVENUE à</h1>
                 <h1 className="text-4xl text-blue-950 font-lexend font-semibold">E-learning</h1>
                 <h1 className="text-4xl font-lexend text-blue-950 font-semibold m-2 ">ESI SBA</h1>
@@ -61,21 +61,21 @@ export const Login = () => {
                 </div>
                 {errorMessage && <div className="text-red-600">{errorMessage}</div>}
                 <input
-                    className="border border-gray-800 focus:outline-none m-2 rounded-md w-72 h-10 pl-4 placeholder-gray-600 placeholder:font-lexend text-black font-lexend"
+                    className="border border-gray-800 focus:outline-none m-2 rounded-md md:w-full lg:w-72 w-72 h-10 pl-4 placeholder-gray-600 placeholder:font-lexend text-black font-lexend"
                     value={email}
                     placeholder="Email"
                     onChange={handleEmailChange}
                     type="email"
                 />
                 <input
-                    className="border border-gray-800 focus:outline-none m-2 rounded-md w-72 h-10 pl-4 placeholder-gray-600 text-black font-lexend placeholder:font-lexend"
+                    className="border border-gray-800 focus:outline-none m-2 rounded-md md:w-full lg:w-72 w-72 h-10 pl-4 placeholder-gray-600 text-black font-lexend placeholder:font-lexend"
                     value={password}
                     placeholder="Mot de passe"
                     onChange={handlePasswordChange}
                     type="password"
                 />
                 <button
-                    className="border border-blue-950 bg-blue-950 m-2 text-white rounded-md w-72 h-10 font-lexend font-semibold active:scale-[.98]"
+                    className="border border-blue-950 bg-blue-950 m-2 text-white rounded-md w-72  md:w-full lg:w-72 h-10 font-lexend font-semibold active:scale-[.98]"
                     onClick={handleLogin}
                     type="button"
                 >
@@ -83,7 +83,7 @@ export const Login = () => {
                 </button>
                 <Link to='/password' className="text-blue-950 font-lexend font-medium text-sm ">Mot de passe oublie? </Link>
             </div>
-            <div className="col-span-2 h-screen bg-white">
+            <div className="col-span-1 md:col-span-1 lg:col-span-2 h-screen bg-white hidden sm:block md:block">
                 <img src={Image} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
             </div>
         </div>
