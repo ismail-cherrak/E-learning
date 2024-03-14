@@ -19,7 +19,11 @@ const enseignantSchema = new mongoose.Schema({
             ref: 'moduleModels'
         },
         estChargeCour: Boolean       
-    }]
+    }],
+    user_id: {
+        type: String,
+        required: true
+      }
 });
 const enseignant = mongoose.model('enseignant', enseignantSchema);
 module.exports = enseignant;
