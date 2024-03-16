@@ -1,3 +1,13 @@
+@import url('https://fonts.googleapis.com/css2?family=Pacifico&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lexend:wght@100..900&family=Pacifico&display=swap');
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.font-pacifico {
+    font-family: 'Pacifico', cursive;
+    }
+    
+    .font-lexend {
+    font-family: 'Lexend', sans-serif;
+    }
