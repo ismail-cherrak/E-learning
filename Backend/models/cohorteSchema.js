@@ -9,5 +9,14 @@ const cohorteSchema = new mongoose.Schema({
     module:{
         type:mongoose.Types.ObjectId,
         required:true
+    },
+    url: {
+        type: String,
+        validate: {
+            validator: function(v) {
+                return /^https?:\/\/.+/.test(v); // Basic URL format validation
+            },
+            message: props => "${props.value} is not a valid URL!"
+        }
     }
 })
