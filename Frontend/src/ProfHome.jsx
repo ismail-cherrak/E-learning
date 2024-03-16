@@ -2,6 +2,6 @@
 
 export const ProfHome = () => {
   return (
-    <div>ProfHome</div>
+    <div>ProfHome</div>  
   )
 }
