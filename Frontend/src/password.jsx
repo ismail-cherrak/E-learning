@@ -14,14 +14,12 @@ function Password() {
     const handleSendCode = async () => {
         try {
             const response = await axios.post('http://localhost:4000/auth/forgot-password', { email });
-
             console.log(response.data.message);
             // Redirect user to the new password page
             window.location.href = '/Codepin';
         } catch (error) {
             setErrorMessage(error.response.data.error);
         }
-      
     };
 
     return (
@@ -56,10 +54,7 @@ function Password() {
                 <img src={Image} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
             </div>
         </div>
-        
     );
-    
-
 }
 
 export default Password;

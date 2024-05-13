@@ -15,14 +15,16 @@ function Codepin() {
     const handleConfirm = async () => {
         try {
             // Make an Axios request to verify the PIN
-            const response = await axios.post('http://localhost:4000/auth/verify-pin', {  pin });
+            const response = await axios.post('http://localhost:4000/auth/verify-pin', { pin });
             // If successful, redirect to the next page
-            console.log(response.data.message);
+            if (response.data.success) {
                 window.location.href = '/newpsw';
-            
+            } else {
+                setError('Invalid PIN. Please try again.');
+            }
         } catch (error) {
             // If there's an error, set the error message
-            setError('Invalid PIN');
+            setError('An error occurred. Please try again.');
         }
     };
 

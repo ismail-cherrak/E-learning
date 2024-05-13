@@ -30,7 +30,10 @@ const etudiantSchema = new mongoose.Schema({
         type:String,
         required:true 
      }, 
-    cohorte:String
+    user_id: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'authentication'
+      }
 });
 
 const etudiant = mongoose.model('Etudiant', etudiantSchema);

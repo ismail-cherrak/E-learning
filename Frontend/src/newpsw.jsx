@@ -32,7 +32,7 @@ function NewPassword() {
             const response = await axios.post('http://localhost:4000/auth/reset-password', { password });
             console.log(response.data.message);
             // Redirect user to the login page
-            window.location.href = '/';
+            window.location.href = '/login';
         } catch (error) {
             setError(error.response.data.error);
         }
@@ -46,8 +46,8 @@ function NewPassword() {
                 </div>
                 <h1 className="text-blue-950 font-lexend font-medium">Nouveau mot de passe </h1>
                 <p className="text-black text-center font-lexend font-light text-sm m-4">Veuillez entrer votre nouveau mot de passe</p>
-                <input className="border border-gray-800 focus:outline-none m-2 rounded-md w-72 md:w-full lg:w-72 h-10 pl-4 placeholder-gray-600 placeholder:font-lexend text-black font-lexend " placeholder="Nouveau mot de passe" type="password" value={password} onChange={handlePasswordChange} />
-                <input className="border border-gray-800 focus:outline-none m-2 rounded-md w-72  md:w-full lg:w-72 h-10 pl-4 placeholder-gray-600 text-black font-lexend placeholder:font-lexend" placeholder="Confirmer mot de passe" type="password" value={passwordConfirm} onChange={handlePasswordConfirmChange} />
+                <input className="border border-gray-800 focus:outline-none m-2 rounded-md w-72 md:w-full lg:w-72 h-10 pl-4 placeholder-gray-600 placeholder:font-lexend text-black font-lexend " placeholder="Nouveau mot de passe" value={password} onChange={handlePasswordChange} />
+                <input className="border border-gray-800 focus:outline-none m-2 rounded-md w-72  md:w-full lg:w-72 h-10 pl-4 placeholder-gray-600 text-black font-lexend placeholder:font-lexend" placeholder="Confirmer mot de passe" value={passwordConfirm} onChange={handlePasswordConfirmChange} />
                 <button className="border border-blue-950 bg-blue-950 m-2 text-white rounded-md w-72  md:w-full lg:w-72 h-10 font-lexend font-semibold active:scale-[.98]" type="submit" onClick={handleConfirm}>Confirmer</button>
                 {error && <p className="text-red-500">{error}</p>}
             </div>

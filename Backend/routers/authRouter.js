@@ -18,11 +18,9 @@ router.post("/addUser", addUser);
 
 router.post('/forgot-password',forgetPassword);
 
-router.post('/verify-pin',verifyPin);
+router.post('/verify-pin/:email',verifyPin);
 
-router.post('/reset-password', resetPassword);
+router.post('/reset-password/:email', resetPassword)
 
-
- 
 
 module.exports = router ;

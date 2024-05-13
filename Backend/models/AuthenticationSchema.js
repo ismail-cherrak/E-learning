@@ -3,24 +3,24 @@ const bcrypt = require('bcrypt')
 const validator = require('validator')
 
 const authSchema = new mongoose.Schema({
-    email: {
-        type: String,
-        required: true,
-        unique: true
-    },
-    password:{
-        type:String,
-        required:true
-    },
-    type:{
-        type:String,
-        required:false
-    },
-    verificationCode : {
-      type:Number,
-        required:false
-    }
-});  
+  email: {
+      type: String,
+      required: true,
+      unique: true
+  },
+  password:{
+      type:String,
+      required:true
+  },
+  type:{
+      type:String,
+      required:false
+  },
+  verificationCode : {
+    type:Number,
+      required:false
+  }
+});   
 
 // static signup method
 authSchema.statics.signup = async function(email, password,type) {
@@ -61,9 +61,6 @@ authSchema.statics.login = async function(email, password) {
     }
   
     const user = await this.findOne({ email })
-    // if (!user) {
-    //   throw Error('Email or password incorrect')
-    // }
   
     const match = await bcrypt.compare(password, user.password)
     if (!match || !user) {

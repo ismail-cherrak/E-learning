@@ -16,13 +16,13 @@ const enseignantSchema = new mongoose.Schema({
     Modules: [{
         _id: {
             type: mongoose.Schema.Types.ObjectId,
-            ref: 'moduleModels'
+            ref: 'moduleModel'
         },
         estChargeCour: Boolean       
     }],
     user_id: {
-        type: String,
-        required: true
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'authentication'
       }
 });
 const enseignant = mongoose.model('enseignant', enseignantSchema);
