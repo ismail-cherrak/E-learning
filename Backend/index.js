@@ -25,6 +25,7 @@ const resourceRoute = require('./routers/resourceRouter')
 const devoirRoute = require('./routers/devoirRoutes')
 const etudiantRoute = require('./routers/etudiant')
 const quizzRoute = require('./routers/quizzRouter')
+const forumRoute = require('./routers/forumRoute')
 app.use(express.json());
 app.use(cors()); // Use CORS middleware
 
@@ -48,6 +49,7 @@ app.use('/resource',resourceRoute)
 app.use('/devoir',devoirRoute)
 app.use('/etudiant', etudiantRoute)
 app.use('/quizz', quizzRoute)
+app.use('/forum',forumRoute)
 // Connect to the database
 connectDB();
 
