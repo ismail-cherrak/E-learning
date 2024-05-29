@@ -4,7 +4,7 @@ const Chapter = require('../models/chapterSchema');
 
   const addCardToChapter = async (req, res) => {
     const { chapterId } = req.params;
-    const { title } = req.body;
+    // const { title } = req.body;
 
     try {
         // Check if the chapter exists
@@ -13,8 +13,9 @@ const Chapter = require('../models/chapterSchema');
             return res.status(404).send('Chapter not found');
         }
 
-        // Create a new card
-        const newCard = new Card({ title });
+        // // Create a new card
+        // const newCard = new Card({ title });
+        const newCard = new Card();
         await newCard.save();
 
         // Add the card to the chapter

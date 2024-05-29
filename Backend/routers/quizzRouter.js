@@ -14,7 +14,7 @@ router.get('/visible',authMiddleware, quizzController.getAllVisibleQuizzes);
 router.get('/:quizId', authMiddleware,quizzController.getQuizById);
 router.get('/:quizId/getSubmitted'/*,authMiddleware*/,quizzController.getAllSubmittedWork);
 router.put('/:quizzId/toggleVisibility',authMiddleware ,  quizzController.toggleQuizzVisibility);
-router.delete('/:quizzId',authMiddleware, quizzController.deleteQuizz);
+router.delete('/:quizzId', quizzController.deleteQuizz);
 router.post('/add/:moduleId'/*, authMiddleware*/, quizzController.addQuiz);
 router.post('/:quizId/addQuestion', authMiddleware,quizzController.addQuestion);
 router.post('/:quizId/submit'/*, authMiddleware*/, quizzController.submitQuizz);

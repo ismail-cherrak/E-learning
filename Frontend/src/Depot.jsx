@@ -1,6 +1,13 @@
+
+
+
 // import React, { useState, useEffect } from 'react';
 // import axios from 'axios';
 // import { useParams } from 'react-router-dom';
+// import Swal from 'sweetalert2';
+// import withReactContent from 'sweetalert2-react-content';
+
+// const MySwal = withReactContent(Swal);
 
 // export const Depot = () => {
 //   const { id, idmod } = useParams(); // Extract route parameters
@@ -48,6 +55,39 @@
 //     }
 //   };
 
+//   const handleDeleteCard = async (cardId) => {
+//     MySwal.fire({
+//       title: 'Êtes-vous sûr?',
+//       text: "Voulez-vous vraiment supprimer cette carte?",
+//       icon: 'warning',
+//       showCancelButton: true,
+//       confirmButtonColor: '#d33',
+//       cancelButtonColor: '#3085d6',
+//       confirmButtonText: 'Oui, supprimer!',
+//       cancelButtonText: 'Annuler',
+//     }).then(async (result) => {
+//       if (result.isConfirmed) {
+//         try {
+//           await axios.delete(`http://localhost:4000/card/${cardId}/delete`);
+//           window.location.reload();
+//         } catch (error) {
+//           console.error('Error deleting card:', error);
+//         }
+//       }
+//     });
+//   };
+
+//   const handleAddCard = async (chapterId) => {
+//     try {
+//       await axios.post(`http://localhost:4000/card/${chapterId}/cards`);
+//       window.location.reload();
+//     } catch (error) {
+//       console.error('Error adding card:', error);
+//     }
+//   };
+  
+  
+
 //   return (
 //     <div className="p-6 bg-gray-100 min-h-screen">
 //       <button
@@ -57,40 +97,51 @@
 //         {showForm ? 'Cancel' : 'Add Chapter'}
 //       </button>
 //       {showForm && (
-//         <div>
-//           <input
-//             type="text"
-//             placeholder="Chapter Name"
-//             value={newChapter}
-//             onChange={(e) => setNewChapter(e.target.value)}
-//             className="p-2 border border-gray-300 rounded mb-4"
-//           />
-//           <button
-//             onClick={handleAddChapter} // Call handleAddChapter function on button click
-//             className="bg-green-500 text-white font-semibold py-2 px-4 rounded"
-//           >
-//             Submit
-//           </button>
+//         <div className="bg-white p-6 rounded-lg shadow-md mb-4">
+//           <h2 className="text-xl font-semibold mb-4">Add New Chapter</h2>
+//           <div className="mb-4">
+//             <label htmlFor="chapterName" className="block text-gray-700 font-medium mb-2">Chapter Name</label>
+//             <input
+//               type="text"
+//               id="chapterName"
+//               placeholder="Enter chapter name"
+//               value={newChapter}
+//               onChange={(e) => setNewChapter(e.target.value)}
+//               className="w-full p-2 border border-gray-300 rounded"
+//             />
+//           </div>
+//           <div className="flex justify-end">
+//             <button
+//               onClick={handleAddChapter}
+//               className="bg-green-500 text-white font-semibold py-2 px-4 rounded"
+//             >
+//               Add Chapter
+//             </button>
+//           </div>
 //         </div>
 //       )}
 //       {sampleProgram ? (
 //         sampleProgram.map((chapter) => (
 //           <div key={chapter._id} className="mb-8">
-//             <div className="flex justify-between">
+//             <div className="flex justify-between items-center">
 //               <div>
 //                 <h2 className="text-2xl font-bold text-gray-700 mb-2">{chapter.chapterName}</h2>
 //                 <p className="text-gray-500 mb-6">Chapter ID: {chapter.chapterId}</p>
 //               </div>
-//               <button
-//                 onClick={() => {
-//                   if (window.confirm(`Are you sure you want to delete this chapter? ${chapter.chapterId}`)) {
-//                     handleDeleteChapter(chapter.chapterId);
-//                   }
-//                 }}
-//                 className="bg-red-500 text-white font-semibold py-2 px-4 rounded"
-//               >
-//                 Delete Chapter
-//               </button>
+//               <div className="space-x-2">
+//                 <button
+//                   onClick={() => handleDeleteChapter(chapter.chapterId)}
+//                   className="bg-red-500 text-white font-semibold py-1 px-3 rounded text-sm"
+//                 >
+//                   Supprimer le chapitre
+//                 </button>
+//                 <button
+//                   onClick={() => handleAddCard(chapter.chapterId)}
+//                   className="bg-green-500 text-white font-semibold py-1 px-3 rounded text-sm"
+//                 >
+//                   Add Card
+//                 </button>
+//               </div>
 //             </div>
 //             {chapter.cards.length === 0 ? (
 //               <p className="text-gray-500">No cards available.</p>
@@ -99,8 +150,25 @@
 //                 {chapter.cards.map((card) => (
 //                   <div
 //                     key={card.cardId}
-//                     className="bg-white p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300 w-full"
+//                     className="bg-white p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300 w-full relative"
 //                   >
+//                     <button
+//                       onClick={() => handleDeleteCard(card.cardId)}
+//                       className="absolute top-2 right-2 text-red-500 hover:text-red-700"
+//                     >
+//                       <svg
+//                         xmlns="http://www.w3.org/2000/svg"
+//                         className="h-5 w-5"
+//                         viewBox="0 0 20 20"
+//                         fill="currentColor"
+//                       >
+//                         <path
+//                           fillRule="evenodd"
+//                           d="M10 1a1 1 0 0 1 1 1v12a1 1 0 0 1-2 0V2a1 1 0 0 1 1-1zm-4 2a1 1 0 0 1 2 0v12a1 1 0 1 1-2 0V3zm10-1a1 1 0 0 1 2 0v12a1 1 0 1 1-2 0V2zM5.879 18.121A1 1 0 0 1 4.464 19.536l-.707-.707a1 1 0 0 1 1.415-1.414l.707.707zm10.657 0a1 1 0 0 1-1.415 1.414l-.707-.707a1 1 0 0 1 1.415-1.414l.707.707z"
+//                           clipRule="evenodd"
+//                         />
+//                       </svg>
+//                     </button>
 //                     <h3 className="text-lg font-semibold text-gray-700">Card {card.cardId}</h3>
 //                     {card.files.length === 0 ? (
 //                       <p className="text-gray-500">No files in this card.</p>
@@ -145,41 +213,44 @@
 //   );
 // };
 
+// export default Depot;
+
+
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
+import Swal from 'sweetalert2';
+import withReactContent from 'sweetalert2-react-content';
+
+const MySwal = withReactContent(Swal);
 
 export const Depot = () => {
-  const { id, idmod } = useParams(); // Extract route parameters
-  const [sampleProgram, setSampleProgram] = useState(null); // State for program data
-  const [loading, setLoading] = useState(true); // Loading state
-  const [error, setError] = useState(null); // Error state
-  const [newChapter, setNewChapter] = useState(''); // State for new chapter input
-  const [showForm, setShowForm] = useState(false); // State to toggle form visibility
-  const [showCardForm, setShowCardForm] = useState({}); // State to toggle card form visibility
-  const [newCard, setNewCard] = useState({ title: '', elements: [{ type: '', value: '' }] }); // State for new card input
+  const { id, idmod } = useParams();
+  const [sampleProgram, setSampleProgram] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+  const [newChapter, setNewChapter] = useState('');
+  const [showForm, setShowForm] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         const response = await axios.get(`http://localhost:4000/module/${idmod}/program`);
-        setSampleProgram(response.data.program); // Update state with fetched data
+        setSampleProgram(response.data.program);
         console.log(response.data.program);
       } catch (error) {
-        setError('Error fetching data'); // Set error message
+        setError('Error fetching data');
       } finally {
-        setLoading(false); // Mark loading as done
+        setLoading(false);
       }
     };
 
-    fetchData(); // Fetch data when the component is mounted
-  }, [idmod]); // Dependency array with idmod to re-run when it changes
+    fetchData();
+  }, [idmod]);
 
   const handleAddChapter = async () => {
     try {
-      // Send POST request to add new chapter
       await axios.post(`http://localhost:4000/chapter/${idmod}/addChapter`, { title: newChapter });
-      // Refresh the page after adding the chapter
       window.location.reload();
     } catch (error) {
       console.error('Error adding chapter:', error);
@@ -188,78 +259,154 @@ export const Depot = () => {
 
   const handleDeleteChapter = async (chapterId) => {
     try {
-      // Send DELETE request to delete chapter
       await axios.delete(`http://localhost:4000/chapter/${idmod}/${chapterId}`);
-      // Refresh the page after deleting the chapter
       window.location.reload();
     } catch (error) {
       console.error('Error deleting chapter:', error);
     }
   };
 
+  const handleDeleteCard = async (cardId) => {
+    MySwal.fire({
+      title: 'Êtes-vous sûr?',
+      text: "Voulez-vous vraiment supprimer cette carte?",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#d33',
+      cancelButtonColor: '#3085d6',
+      confirmButtonText: 'Oui, supprimer!',
+      cancelButtonText: 'Annuler',
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        try {
+          await axios.delete(`http://localhost:4000/card/${cardId}/delete`);
+          window.location.reload();
+        } catch (error) {
+          console.error('Error deleting card:', error);
+        }
+      }
+    });
+  };
+
   const handleAddCard = async (chapterId) => {
     try {
-      // Send POST request to add new card
-      const formData = new FormData();
-      formData.append('title', newCard.title);
-      newCard.elements.forEach((element, index) => {
-        formData.append(`elements[${index}][type]`, element.type);
-        formData.append(`elements[${index}][value]`, element.value);
-      });
-
-      await axios.post(`http://localhost:4000/chapter/${idmod}/${chapterId}/addCard`, formData, {
-        headers: {
-          'Content-Type': 'multipart/form-data',
-        },
-      });
-      // Refresh the page after adding the card
+      await axios.post(`http://localhost:4000/card/${chapterId}/cards`);
       window.location.reload();
     } catch (error) {
       console.error('Error adding card:', error);
     }
   };
 
-  const handleElementChange = (index, field, value) => {
-    const newElements = [...newCard.elements];
-    newElements[index][field] = value;
-    setNewCard({ ...newCard, elements: newElements });
-  };
+  const handleFillCard = (cardId) => {
+    MySwal.fire({
+      title: 'Add New Card',
+      html: `
+        <div>
+          <label for="cardType1">Type 1</label>
+          <select id="cardType1" class="swal2-input">
+            <option value="cours">Cours</option>
+            <option value="td">TD</option>
+            <option value="tp">TP</option>
+            <option value="mooc">MOOC</option>
+          </select>
+          <input type="file" id="cardFile1" class="swal2-input">
+          <input type="text" id="cardUrl1" class="swal2-input" placeholder="Enter URL" style="display: none;">
+        </div>
+        <div>
+          <label for="cardType2">Type 2</label>
+          <select id="cardType2" class="swal2-input">
+            <option value="cours">Cours</option>
+            <option value="td">TD</option>
+            <option value="tp">TP</option>
+            <option value="mooc">MOOC</option>
+          </select>
+          <input type="file" id="cardFile2" class="swal2-input">
+          <input type="text" id="cardUrl2" class="swal2-input" placeholder="Enter URL" style="display: none;">
+        </div>
+        <div>
+          <label for="cardType3">Type 3</label>
+          <select id="cardType3" class="swal2-input">
+            <option value="cours">Cours</option>
+            <option value="td">TD</option>
+            <option value="tp">TP</option>
+            <option value="mooc">MOOC</option>
+          </select>
+          <input type="file" id="cardFile3" class="swal2-input">
+          <input type="text" id="cardUrl3" class="swal2-input" placeholder="Enter URL" style="display: none;">
+        </div>
+      `,
+      showCancelButton: true,
+      confirmButtonText: 'Add',
+      preConfirm: () => {
+        const types = [];
+        const files = [];
+        const urls = [];
 
-  const handleFileChange = (index, file) => {
-    const newElements = [...newCard.elements];
-    newElements[index].value = file;
-    setNewCard({ ...newCard, elements: newElements });
-  };
+        for (let i = 1; i <= 3; i++) {
+          types.push(document.getElementById(`cardType${i}`).value);
+          const fileInput = document.getElementById(`cardFile${i}`);
+          files.push(fileInput.files[0]);
+          const urlInput = document.getElementById(`cardUrl${i}`);
+          urls.push(urlInput.value);
+        }
 
-  const addElementField = () => {
-    if (newCard.elements.length < 3) {
-      setNewCard({ ...newCard, elements: [...newCard.elements, { type: '', value: '' }] });
-    }
+        return { types, files, urls };
+      }
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        const { types, files, urls } = result.value;
+        const formData = new FormData();
+
+        types.forEach((type, index) => {
+          formData.append(`types`, type);
+          formData.append(`files`, files[index]);
+          formData.append(`urls`, urls[index]);
+        });
+
+        try {
+          await axios.post(`http://localhost:4000/card/${cardId}/files`, formData, {
+            headers: {
+              'Content-Type': 'multipart/form-data',
+            },
+          });
+          window.location.reload();
+        } catch (error) {
+          console.error('Error adding files to card:', error);
+        }
+      }
+    });
   };
 
   return (
     <div className="p-6 bg-gray-100 min-h-screen">
       <button
-        onClick={() => setShowForm(!showForm)} // Toggle form visibility
+        onClick={() => setShowForm(!showForm)}
         className="bg-blue-500 text-white font-semibold py-2 px-4 rounded mb-4"
       >
         {showForm ? 'Cancel' : 'Add Chapter'}
       </button>
       {showForm && (
-        <div>
-          <input
-            type="text"
-            placeholder="Chapter Name"
-            value={newChapter}
-            onChange={(e) => setNewChapter(e.target.value)}
-            className="p-2 border border-gray-300 rounded mb-4"
-          />
-          <button
-            onClick={handleAddChapter} // Call handleAddChapter function on button click
-            className="bg-green-500 text-white font-semibold py-2 px-4 rounded"
-          >
-            Submit
-          </button>
+        <div className="bg-white p-6 rounded-lg shadow-md mb-4">
+          <h2 className="text-xl font-semibold mb-4">Add New Chapter</h2>
+          <div className="mb-4">
+            <label htmlFor="chapterName" className="block text-gray-700 font-medium mb-2">Chapter Name</label>
+            <input
+              type="text"
+              id="chapterName"
+              placeholder="Enter chapter name"
+              value={newChapter}
+              onChange={(e) => setNewChapter(e.target.value)}
+              className="w-full p-2 border border-gray-300 rounded"
+            />
+          </div>
+          <div className="flex justify-end">
+            <button
+              onClick={handleAddChapter}
+              className="bg-green-500 text-white font-semibold py-2 px-4 rounded"
+            >
+              Add Chapter
+            </button>
+          </div>
         </div>
       )}
       {sampleProgram ? (
@@ -270,80 +417,21 @@ export const Depot = () => {
                 <h2 className="text-2xl font-bold text-gray-700 mb-2">{chapter.chapterName}</h2>
                 <p className="text-gray-500 mb-6">Chapter ID: {chapter.chapterId}</p>
               </div>
-              <div className="flex space-x-2">
+              <div className="space-x-2">
                 <button
-                  onClick={() => setShowCardForm({ ...showCardForm, [chapter._id]: !showCardForm[chapter._id] })} // Toggle card form visibility
-                  className="bg-yellow-500 text-white font-semibold py-1 px-2 rounded"
+                  onClick={() => handleDeleteChapter(chapter.chapterId)}
+                  className="bg-red-500 text-white font-semibold py-1 px-3 rounded text-sm"
                 >
-                  {showCardForm[chapter._id] ? 'Cancel' : 'Add Card'}
+                  Supprimer le chapitre
                 </button>
                 <button
-                  onClick={() => {
-                    if (window.confirm(`Are you sure you want to delete this chapter? ${chapter.chapterId}`)) {
-                      handleDeleteChapter(chapter.chapterId);
-                    }
-                  }}
-                  className="bg-red-500 text-white font-semibold py-1 px-2 rounded text-sm"
+                  onClick={() => handleAddCard(chapter.chapterId)}
+                  className="bg-green-500 text-white font-semibold py-1 px-3 rounded text-sm"
                 >
-                  Delete
+                  Add Card
                 </button>
               </div>
             </div>
-            {showCardForm[chapter._id] && (
-              <div className="mb-4">
-                <input
-                  type="text"
-                  placeholder="Card Title"
-                  value={newCard.title}
-                  onChange={(e) => setNewCard({ ...newCard, title: e.target.value })}
-                  className="p-2 border border-gray-300 rounded mb-2"
-                />
-                {newCard.elements.map((element, index) => (
-                  <div key={index} className="flex space-x-2 mb-2">
-                    <select
-                      value={element.type}
-                      onChange={(e) => handleElementChange(index, 'type', e.target.value)}
-                      className="p-2 border border-gray-300 rounded"
-                    >
-                      <option value="">Select Type</option>
-                      <option value="cours">Cours</option>
-                      <option value="td">TD</option>
-                      <option value="tp">TP</option>
-                      <option value="mooc">MOOC</option>
-                    </select>
-                    {['cours', 'td', 'tp'].includes(element.type) ? (
-                      <input
-                        type="file"
-                        onChange={(e) => handleFileChange(index, e.target.files[0])}
-                        className="p-2 border border-gray-300 rounded"
-                      />
-                    ) : (
-                      <input
-                        type="text"
-                        placeholder="Element Value"
-                        value={element.value}
-                        onChange={(e) => handleElementChange(index, 'value', e.target.value)}
-                        className="p-2 border border-gray-300 rounded"
-                      />
-                    )}
-                  </div>
-                ))}
-                {newCard.elements.length < 3 && (
-                  <button
-                    onClick={addElementField}
-                    className="bg-blue-500 text-white font-semibold py-1 px-2 rounded mb-2"
-                  >
-                    Add Another Element
-                  </button>
-                )}
-                <button
-                  onClick={() => handleAddCard(chapter._id)} // Call handleAddCard function on button click
-                  className="bg-green-500 text-white font-semibold py-1 px-2 rounded"
-                >
-                  Submit Card
-                </button>
-              </div>
-            )}
             {chapter.cards.length === 0 ? (
               <p className="text-gray-500">No cards available.</p>
             ) : (
@@ -351,8 +439,31 @@ export const Depot = () => {
                 {chapter.cards.map((card) => (
                   <div
                     key={card.cardId}
-                    className="bg-white p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300 w-full"
+                    className="bg-white p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300 w-full relative"
                   >
+                    <button
+                      onClick={() => handleDeleteCard(card.cardId)}
+                      className="absolute top-2 right-2 text-red-500 hover:text-red-700"
+                    >
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        className="h-5 w-5"
+                        viewBox="0 0 20 20"
+                        fill="currentColor"
+                      >
+                        <path
+                          fillRule="evenodd"
+                          d="M10 1a1 1 0 0 1 1 1v12a1 1 0 0 1-2 0V2a1 1 0 0 1 1-1zm-4 2a1 1 0 0 1 2 0v12a1 1 0 1 1-2 0V3zm10-1a1 1 0 0 1 2 0v12a1 1 0 1 1-2 0V2zM5.879 18.121A1 1 0 0 1 4.464 19.536l-.707-.707a1 1 0 0 1 1.415-1.414l.707.707zm10.657 0a1 1 0 0 1-1.415 1.414l-.707-.707a1 1 0 0 1 1.415-1.414l.707.707z"
+                          clipRule="evenodd"
+                        />
+                      </svg>
+                    </button>
+                    <button
+                      onClick={() => handleFillCard(card.cardId)}
+                      className="bg-blue-500 text-white font-semibold py-1 px-3 rounded text-sm absolute top-2 left-2"
+                    >
+                      Fill Card
+                    </button>
                     <h3 className="text-lg font-semibold text-gray-700">Card {card.cardId}</h3>
                     {card.files.length === 0 ? (
                       <p className="text-gray-500">No files in this card.</p>
@@ -374,7 +485,7 @@ export const Depot = () => {
                               </a>
                             ) : (
                               <a
-                                href={`http://localhost:4000/download/${file.downloadLink.split('/').pop()}`} // Construct the download link
+                                href={`http://localhost:4000/download/${file.downloadLink.split('/').pop()}`}
                                 className="hover:underline"
                               >
                                 {file.fileType}: {file.downloadLink.split('/').pop()}
@@ -391,8 +502,10 @@ export const Depot = () => {
           </div>
         ))
       ) : (
-        <div>No program data available.</div> // Handle no data case
+        <div>No program data available.</div>
       )}
     </div>
   );
 };
+
+export default Depot;

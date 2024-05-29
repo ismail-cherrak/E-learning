@@ -8,7 +8,7 @@ const teacherMiddleware = require('../middleware/chargeCourMiddleware');
 const { toggleCardVisibility } = require('../Controllers/cardController');
 
 
-router.delete('/:cardId/delete',authMiddleware, cardController.deleteCard);
+router.delete('/:cardId/delete',cardController.deleteCard);
 router.put('/:cardId/visibility', async (req, res) => {
     const { cardId } = req.params;
     try {
@@ -19,7 +19,7 @@ router.put('/:cardId/visibility', async (req, res) => {
         res.status(500).send('Error toggling card visibility.');
     }
 });
-router.post('/:chapterId/cards',authMiddleware, cardController.addCardToChapter);
+router.post('/:chapterId/cards', cardController.addCardToChapter);
 
 router.post('/:cardId/files',uploadMiddleware , addFileToCard);
 
