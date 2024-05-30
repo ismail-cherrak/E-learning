@@ -76,11 +76,19 @@ const loginUser = async (req, res) => {
     }
 
     // Send response with email, token, role, and user ID
-    res.status(200).json({ email, token, role ,id:userId});
+    res.status(200).json({ email, token, role ,id:userId, idAuth : user._id });
   } catch (error) {
     res.status(400).json({ error: error.message });
   }
 };
+
+
+
+
+
+
+
+
 
 
 // Add a user

@@ -20,15 +20,15 @@
          }    
          try {
            const response = await axios.post('http://localhost:4000/auth/login', { email, password });
-           const { token, role,id } = response.data;
+           const { token, role,id,idAuth } = response.data;
            localStorage.setItem('token', token);    
            // Redirect based on user's role
            if (role === 'etudiantHome') {
-             window.location.href = `/EtudiantHome/${id}`;
+             window.location.href = `/EtudiantHome/${idAuth}/${id}`;
            } else if (role === 'profHome') {
-             window.location.href = `/ProfHome/${id}`;
+             window.location.href = `/ProfHome/${idAuth}/${id}`;
            } else if (role === 'adminHome') {
-             window.location.href = `/AdminHome/${id}`;
+             window.location.href = `/AdminHome/${idAuth}/${id}`;
            }
          } catch (error) {
            setErrorMessage('Incorrect email or password');

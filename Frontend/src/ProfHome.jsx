@@ -6,7 +6,7 @@ export const ProfHome = () => {
   // Dummy data for modules 
   const[modules,setModules] = useState([])
  
-    const {id} = useParams()
+    const {idAuth,id} = useParams()
 
   // Logout function 
   const handleLogout = () => { 
@@ -36,10 +36,10 @@ export const ProfHome = () => {
       const response = await axios.get(`http://localhost:4000/enseignant/${id}/${idmod}`)
 
       if (response.data === 'chargeCours'){
-        window.location.href=`/chargeCour/${id}/${idmod}`
+        window.location.href=`/chargeCour/${idAuth}/${id}/${idmod}`
       }
       else{
-        window.location.href=`/chargeTd/${id}/${idmod}`
+        window.location.href=`/chargeTd/${idAuth}/${id}/${idmod}`
       }
     }catch(err){
       console.error(err)

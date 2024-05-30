@@ -7,10 +7,8 @@
  import New from './newpsw'
  import './index.css';
  import { AdminHome } from './AdminHome.jsx';
- import Carde from './carde.jsx';
  import { EtudiantHome } from './EtudiantHome.jsx';
  import { ProfHome } from './ProfHome.jsx';
-import Pagedevoir from './devoir.jsx';
 import { ModulePage } from './ModulePage.jsx';
 import {ChCours} from './ChCours.jsx'
 import { ChTd } from './ChTd.jsx';
@@ -34,35 +32,27 @@ import { ChTd } from './ChTd.jsx';
      element: <Password />,
    },
    {
-     path: "/AdminHome/:id",
+     path: "/AdminHome/:idAuth/:id",
      element: <AdminHome />,
    },
    {
-     path: "/carde",
-     element: <Carde/>,
-   },
-  { 
-    path: "/devoir", 
-    element: <Pagedevoir/>, 
-  },
-   {
-     path: "/EtudiantHome/:id",
+     path: "/EtudiantHome/:idAuth/:id",
      element: <EtudiantHome/>,
    },
    {
-     path: "/ProfHome/:id",
+     path: "/ProfHome/:idAuth/:id",
      element: <ProfHome />,
    },
   {
-    path: "/EtudiantHome/:id/:idmod",
+    path: "/EtudiantHome/:idAuth/:id/:idmod",
     element: <ModulePage />,
   },
   {
-    path: "/chargeCour/:id/:idmod",
+    path: "/chargeCour/:idAuth/:id/:idmod",
     element: <ChCours />,
   },
   {
-    path: "/chargeTd/:id/:idmod",
+    path: "/chargeTd/:idAuth/:id/:idmod",
     element: <ChTd />,
   },
  ]);

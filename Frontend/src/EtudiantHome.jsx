@@ -4,7 +4,7 @@ import { useParams } from 'react-router-dom';
 
 export const EtudiantHome = () => {
   const [modules, setModules] = useState([]); // Initialize as an empty array
-  const { id } = useParams(); // Get the Etudiant ID from the URL
+  const { idAuth,id } = useParams(); // Get the Etudiant ID from the URL
 
   const handleLogout = () => {
     localStorage.clear(); 
@@ -30,7 +30,7 @@ export const EtudiantHome = () => {
 
   const handleRedirect = (idmod) => {
     // Redirects to the new route with Etudiant ID and Module ID
-    window.location.href = `/EtudiantHome/${id}/${idmod}`;
+    window.location.href = `/EtudiantHome/${idAuth}/${id}/${idmod}`;
   };
 
   return (
