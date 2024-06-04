@@ -7,22 +7,61 @@ import { faCheck, faCommenting } from '@fortawesome/free-solid-svg-icons';
 import { useParams } from 'react-router-dom';
 
 // Comment component
-const Comment = ({ content, commentId, onDeleteComment, authore, postId }) => {
-  
+const Comment =({ content, commentId, authore, postId, onDeleteComment }) => {
+ 
+  // const { idmod } = useParams();
+
+  // const handleDeleteComment = async () => {
+  //   try {
+  //     await axios.delete(`http://localhost:4000/forum/deleteReply`, {
+  //       params: { forumId: postId, replyId: commentId } // Use params for URL parameters
+  //     });
+  //     onDeleteComment(commentId);
+  //   } catch (error) {
+  //     if (error.response && error.response.status === 404) {
+  //       console.error('Error deleting reply: Forum not found');
+  //     } else {
+  //       console.error('Error deleting reply:', error.message);
+  //     }
+  //   }
+  // };
+ 
+
+
   const handleDeleteComment = async () => {
+    console.log(postId,commentId)
     try {
-      await axios.delete(`http://localhost:4000/forum/deleteReply`, {
-        params: { forumId: postId, replyId: commentId } // Use params for URL parameters
+      const response = await axios.delete('http://localhost:4000/forum/deleteReply', {
+        data: { forumId: postId, replyId: commentId }
       });
-      onDeleteComment(commentId);
+      if (response.status === 200) {
+        console.log('Reply deleted successfully');
+        onDeleteComment(commentId); // Update the UI after successful deletion
+      }
     } catch (error) {
       if (error.response && error.response.status === 404) {
-        console.error('Error deleting reply: Forum not found');
+        console.error('Error deleting reply: Forum or Reply not found');
+        console.log(commentId)
       } else {
         console.error('Error deleting reply:', error.message);
       }
     }
   };
+  // const handleDeleteComment = async (commendId) => {
+  //   try {
+  //     // Use commentId fetched in the useEffect hook
+  //     await axios.delete('http://localhost:4000/forum/deleteReply', {
+  //       data: { forumId: postId, replyId: commendId }
+  //     });
+  //     onDeleteComment(commendId);
+  //   } catch (error) {
+  //     if (error.response && error.response.status === 404) {
+  //       console.error('Error deleting reply: Forum or Reply not found');
+  //     } else {
+  //       console.error('Error deleting reply:', error.message);
+  //     }
+  //   }
+  // };
 
   return (
     <div className="rounded-md p-2 mb-2">
@@ -35,8 +74,8 @@ const Comment = ({ content, commentId, onDeleteComment, authore, postId }) => {
           <div className="bg-white p-2 rounded">{content}</div>
         </div>
         <button className="text-red-500 ml-auto" onClick={handleDeleteComment}>
-          Delete
-        </button>
+  Delete
+</button>
       </div>
     </div>
   );
@@ -44,7 +83,8 @@ const Comment = ({ content, commentId, onDeleteComment, authore, postId }) => {
 
 Comment.propTypes = {
   content: PropTypes.string.isRequired,
-  commentId: PropTypes.string.isRequired,
+  // commentId: PropTypes.string.isRequired,
+  commentId: PropTypes.string.isRequired, 
   onDeleteComment: PropTypes.func.isRequired, 
   authore: PropTypes.shape({
     _id: PropTypes.string.isRequired,
@@ -58,10 +98,10 @@ Comment.propTypes = {
 
 
 // Post component
-const Post = ({ postId, author = "Anonymous", content, comments = [], onDeletePost  , onDeleteComment}) => {
+const Post = ({ postId , author = "Anonymous", content, comments = [], onDeletePost  , onDeleteComment}) => {
   const [showComments, setShowComments] = useState(false);
   const [commentText, setCommentText] = useState('');
-  const [postComments, setPostComments] = useState(comments);
+  const [postComments, setPostComments] = useState(comments); 
 
   const { idAuth } = useParams();
 
@@ -94,6 +134,7 @@ const Post = ({ postId, author = "Anonymous", content, comments = [], onDeletePo
     }
   };
 
+
   const handleComment = async () => {
     if (commentText.trim() !== '') {
       try {
@@ -107,6 +148,7 @@ const Post = ({ postId, author = "Anonymous", content, comments = [], onDeletePo
         //   nom: newComment.author.nom,
         //   prenom: newComment.author.prenom,
         // };
+        newComment.commendId = response.data._id;
         setPostComments([...postComments, newComment]);
         setCommentText('');
       } catch (error) {
@@ -125,7 +167,7 @@ const Post = ({ postId, author = "Anonymous", content, comments = [], onDeletePo
               <FontAwesomeIcon icon={faCommenting} className="text-white" />
             </div>
             <div>
-              <p className="mb-3"> Posted By <strong>{author.nom} {author.prenom}</strong></p>
+              <p className="mb-3"> Posted By <strong>{author.nom}  {author.prenom}</strong></p>
               <div className="bg-white p-2 rounded">{content}</div>
               <div className="bg-white p-2 rounded">{postId} </div>
               {/* //////////////////////its here the id output */}
@@ -144,18 +186,41 @@ const Post = ({ postId, author = "Anonymous", content, comments = [], onDeletePo
               </button>
             </div>
           </div>
-          {showComments && (
+          {/* {showComments && (
             <div>
               {postComments.map((comment) => (
-                <Comment 
-                key={comment.id} 
-                content={comment.context} 
-                commentId={comment.id} 
-                authore={comment.author} 
-                postId={postId} // Pass postId here
-                onDeleteComment={onDeleteComment} // Pass onDeleteComment without additional parameters
-              />
-              ))}
+              console.log('commentId:', comment.commendId),
+              //   <Comment 
+              //   key={comment.id} 
+              //   content={comment.context} 
+              //   // commentId={comment.id} 
+              //   commendId={comment.commendId} 
+              //   authore={comment.author} 
+              //   postId={postId} // Pass postId here
+              //   onDeleteComment={onDeleteComment} // Pass onDeleteComment without additional parameters
+              // />
+                    <Comment 
+        key={comment.id} 
+        content={comment.context} 
+        commentId={comment.commendId} 
+        authore={comment.author} 
+        postId={postId} 
+        onDeleteComment={onDeleteComment}
+      /> 
+              ))} */}
+
+{showComments && (
+  <div>
+    {postComments.map((comment) => (
+      <Comment 
+        key={comment.commendId} // Ensure key is unique
+        content={comment.context} 
+        commentId={comment.commendId} // Pass commendId as commentId
+        authore={comment.author} 
+        postId={postId} 
+        onDeleteComment={onDeleteComment} 
+      />
+    ))}
               <div className="mb-4 flex items-center p-4 border-b">
                 <input
                   type="text"
@@ -199,7 +264,7 @@ const MessageList = ({ messages }) => {
         {messages.map((message) => (
           <li key={message._id}>
             <div>
-              <p>Context: {message.context}</p>
+              <p>Context: {message.context} </p>
               <p>Author: {message.author.nom} {message.author.prenom}</p>
               <p>Date: {new Date(message.date).toLocaleString()}</p>
               {message.replies.length > 0 && (
@@ -260,6 +325,18 @@ export const EspaceCollabPr = ( { comments = [] }   , postId, onDeleteComment ) 
     setPosts(posts.filter(post => post._id !== postId));
   };
 
+  const handleDeleteComment = (postId, commentId) => {
+    setPosts(posts.map(post => {
+      if (post._id === postId) {
+        return {
+          ...post,
+          comments: post.comments.filter(comment => comment.commendId !== commentId),
+        };
+      }
+      return post;
+    }));
+  };
+
   // const handleDeleteComment = (postId, commentId) => {
   //   setPosts(posts.map(post => {
   //     if (post._id === postId) {
@@ -317,17 +394,51 @@ export const EspaceCollabPr = ( { comments = [] }   , postId, onDeleteComment ) 
   //     console.error('Error deleting post:', error);
   //   }
 
+  // useEffect(() => {
+  //   const fetchPosts = async () => {
+  //     try {
+  //       const response = await axios.get(`http://localhost:4000/forum/${idmod}/forums`);
+  //       if (Array.isArray(response.data)) {
+  //         setPosts(response.data.map(post => ({
+  //           ...post,
+  //           author: post.author,
+  //           content: post.context,
+  //           comments: post.replies.map(reply => ({
+  //             ...reply,
+  //             commendId: reply._id,
+  //             author: {
+  //               _id: reply.author._id,
+  //               nom: reply.author.nom,
+  //               prenom: reply.author.prenom,
+  //               authorType: reply.author.authorType,
+  //               isAuthor: reply.author.isAuthor,
+  //             },
+  //           })),
+  //         })));
+  //       } else {
+  //         setPosts([]);
+  //         console.error('Unexpected data format:', response.data);
+  //       }
+  //     } catch (error) {
+  //       console.error('Error fetching forums:', error);
+  //       setPosts([]);
+  //     }
+  //   };
+  //   fetchPosts();
+  // }, [idmod]);
+
   useEffect(() => {
     const fetchPosts = async () => {
       try {
         const response = await axios.get(`http://localhost:4000/forum/${idmod}/forums`);
         if (Array.isArray(response.data)) {
-          setPosts(response.data.map(post => ({
+          const updatedPosts = response.data.map(post => ({
             ...post,
             author: post.author,
             content: post.context,
             comments: post.replies.map(reply => ({
               ...reply,
+              commendId: reply._id,
               author: {
                 _id: reply.author._id,
                 nom: reply.author.nom,
@@ -336,7 +447,15 @@ export const EspaceCollabPr = ( { comments = [] }   , postId, onDeleteComment ) 
                 isAuthor: reply.author.isAuthor,
               },
             })),
-          })));
+          }));
+  
+          updatedPosts.forEach(post => {
+            post.comments.forEach(comment => {
+              console.log('commendId:', comment.commendId);
+            });
+          });
+  
+          setPosts(updatedPosts);
         } else {
           setPosts([]);
           console.error('Unexpected data format:', response.data);
@@ -361,30 +480,69 @@ export const EspaceCollabPr = ( { comments = [] }   , postId, onDeleteComment ) 
             onChange={(e) => setPostText(e.target.value)}
           />
           <button className="p-2 ml-2 bg-blue-500 text-white rounded" onClick={handlePost}>
-            Post
+            Post 
           </button>
         </div>
         <MessageList messages={messages} />
         {posts.map((post) => (
+          // <Post
+          //   key={post._id}
+          //   postId={post._id}
+          //   author={post.author}
+          //   content={post.content}
+          //   comments={post.replies}
+          //   onDeletePost={handleDeletePost}
+          // />
           <Post
-            key={post._id}
-            postId={post._id}
-            author={post.author}
-            content={post.content}
-            comments={post.replies}
-            onDeletePost={handleDeletePost}
-          />
+  key={post._id}
+  postId={post._id}
+  author={post.author}
+  content={post.content}
+  comments={post.comments}
+  onDeletePost={handleDeletePost}
+  onDeleteComment={(commentId) => handleDeleteComment(post._id, commentId)} // Pass the correct handler
+/> // Make sure this function is defined
         ))}
-        {comments && Array.isArray(comments) && comments.map((comment) => (
+        {/* {comments && Array.isArray(comments) && comments.map((comment) => (
     <Comment 
     key={comment.id} 
     content={comment.context} 
-    commentId={comment.id} 
+    // commentId={comment.id}
+    commendId={comment.replyId}
     authore={comment.author} 
-    postId={postId} // Pass postId here
-    onDeleteComment={onDeleteComment} // Pass onDeleteComment without additional parameters
-  />
-))}
+    postId={postId} 
+    onDeleteComment={onDeleteComment} 
+  /> 
+))} */}
+{comments && Array.isArray(comments) && comments.map((comment) => {
+  console.log('commendId:', comment.commendId); 
+  return (
+    // <Comment 
+    //   key={comment.id} 
+    //   content={comment.context} 
+    //   commendId={comment.commendId} // Pass commendId as replyId
+    //   authore={comment.author} 
+    //   postId={postId} 
+    //   onDeleteComment={onDeleteComment} 
+    // /> 
+//     <Comment 
+//   key={comment.id} 
+//   content={comment.context} 
+//   commendId={comment.commendId} 
+//   authore={comment.author} 
+//   postId={postId} 
+//   onDeleteComment={onDeleteComment} 
+// />
+<Comment 
+  key={comment.id} 
+  content={comment.context} 
+  commentId={comment.commendId} // Change commendId to commentId
+  authore={comment.author} 
+  postId={postId} 
+  onDeleteComment={onDeleteComment} 
+/>
+  );
+})}
       </div>
     </div>
   );

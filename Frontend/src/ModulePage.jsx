@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import  {ProgrammeSt}  from './ProgrammeSt';
 import { RessourceSt } from './RessourceSt';
 import { DevoirSt } from './DevoirSt';
@@ -7,6 +7,7 @@ import { EspaceCollabEtu } from './EspaceCollabEtu';
 
 const Sidebar = ({ activeSection, setActiveSection, handleLogout }) => {
   return (
+    //bg-[#2E85B5]
     <div className="bg-[#2E85B5] text-white w-1/6 flex flex-col justify-between sticky">
       <h1 className="text-lg font-bold ml-4 mt-4">E-learning</h1> {/* Added E-learning */}
       <div className="flex flex-col mt-3 space-y-4">

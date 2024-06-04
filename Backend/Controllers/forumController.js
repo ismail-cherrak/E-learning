@@ -109,7 +109,7 @@ async function addPost(req, res) {
       // Fetch the authType from the Auth schema using the authorId
       const author = await Authentication.findById(authorId);
       if (!author) {
-          return res.status(404).json({ error: 'Author not found' });
+        return res.status(404).json({ error: 'Author not found' });
       }
 
       // Create a new forum instance
