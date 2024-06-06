@@ -185,7 +185,7 @@ const Permissions = () => {
   return (
     <div className="flex w-full h-screen">
       {/* Left part with tables and titles */}
-      <div className="w-3/5 bg-white rounded-l-md shadow-sm p-4 flex flex-col overflow-hidden">
+      <div className="w-3/5 bg-gray-200 rounded-l-md shadow-sm p-4 flex flex-col overflow-hidden">
         <h2 className="text-[#2E85B5] text-xl mb-4">Profs</h2>
 
         <div
@@ -261,7 +261,7 @@ const Permissions = () => {
           <span className="mx-2 text-[#2E85B5]">|</span>
           <button
             onClick={()=> setActiveForm(3)}
-            class={`px-4 py-2 rounded-md hover:text-[#164866] hover:font-bold ${
+            className={`px-4 py-2 rounded-md hover:text-[#164866] hover:font-bold ${
               activeForm === 3 ? 'text-[#164866] font-bold' : 'text-[#2E85B5]'
             }`}
           >

@@ -1,5 +1,5 @@
  import axios from 'axios';
-import React, { useEffect,useState } from 'react'; 
+import { useEffect,useState } from 'react'; 
  import { useParams } from 'react-router-dom'
  
 export const ProfHome = () => { 
@@ -50,7 +50,7 @@ export const ProfHome = () => {
   return ( 
     <div className="flex flex-col h-screen bg-gray-200"> 
       {/* Navbar */} 
-      <div className="h-20 flex items-center justify-between px-4 bg-blue-500"> {/* Adjusted navbar color */} 
+      <div className="h-20 flex items-center justify-between px-4 bg-blue-500">  
         {/* Title */} 
         <div className="flex items-center"> 
           <div className="bg-gray-500 rounded-lg p-2 flex items-center justify-center mr-2"> 
@@ -72,14 +72,14 @@ export const ProfHome = () => {
         {modules.map((module, index) => ( 
           <div 
             key={index} 
-            className="flex flex-col items-center bg-white rounded-lg p-2 " 
+            className="flex flex-col items-center bg-white rounded-lg p-8 " 
             onClick={()=>handleRedirect(module._id)}
           > 
-            <img 
-              src={module.iconUrl} 
+            {/* <img 
+              // src={module.iconUrl} 
               alt={module.nom} 
               className="w-16 h-16 mb-2" 
-            /> 
+            />  */}
             <p className="text-center text-lg font-semibold">{module.nom}</p> 
           </div> 
         ))} 

@@ -4,20 +4,25 @@ import { RessourcePr } from './RessourcePr';
 import { DevoirPr } from './DevoirPr';
 import { QuizzPr } from './QuizzPr';
 import {  EspaceCollabPr } from './EspaceCollabPr';
+import './style.css';
 
 const Sidebar = ({ activeSection, setActiveSection, handleLogout }) => {
   return (
     //bg-[#2E85B5]
-    <div className="bg-grey  text-white w-1/6 flex flex-col justify-between sticky top-0 bottom-0 left-0 overflow-y-auto ">
+    //bg-grey text-white w-1/6 flex flex-col justify-between sticky top-0 bottom-0 left-0 
+    //bg-wghite text-white w-52 h-screen flex flex-col justify-between pt-5 fixed top-0 left-0 
+    //fixed top-0 left-0 h-full w-50 bg-white text-white flex flex-col justify-between pt-5 z-10
+    <div className="sidebar ">
       {/* <h1 className="text-xl text-black font-bold ml-4 mt-4">E-learning</h1> Added E-learning */}
-      <h1 className="text-2xl text-black font-bold ml-4 mt-4 flex items-center">
+      <h1 className="text-2xl text-black font-bold ml-3  flex items-center">
   <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="blue" className="h-6 w-6 mr-2">
     <path strokeLinecap="round" strokeLinejoin="round" d="M4.26 10.147a60.438 60.438 0 0 0-.491 6.347A48.62 48.62 0 0 1 12 20.904a48.62 48.62 0 0 1 8.232-4.41 60.46 60.46 0 0 0-.491-6.347m-15.482 0a50.636 50.636 0 0 0-2.658-.813A59.906 59.906 0 0 1 12 3.493a59.903 59.903 0 0 1 10.399 5.84c-.896.248-1.783.52-2.658.814m-15.482 0A50.717 50.717 0 0 1 12 13.489a50.702 50.702 0 0 1 7.74-3.342M6.75 15a.75.75 0 1 0 0-1.5.75.75 0 0 0 0 1.5Zm0 0v-3.675A55.378 55.378 0 0 1 12 8.443m-7.007 11.55A5.981 5.981 0 0 0 6.75 15.75v-1.5" />
   </svg>
+  |
   E-learning
 </h1>
-      <div className="flex flex-col text-black font-medium mt-1 space-y-4">
-        {['programme', 'ressource', 'devoir', 'quizz', 'espace-collaboratif'].map((section) => (
+      <div className="flex flex-col text-black font-medium space-y-4 ml-1">
+        {['programme', 'menu',  'ressource', 'devoir', 'quizz', 'espace-collaboratif'].map((section) => (
           <button
             key={section}
             onClick={() => setActiveSection(section)}
@@ -74,22 +79,6 @@ const Sidebar = ({ activeSection, setActiveSection, handleLogout }) => {
           />
         </svg>
       )}
-      {/* {section === 'devoir' && (
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          fill="none"
-          viewBox="0 0 24 24"
-          strokeWidth="1.5"
-          stroke="currentColor"
-          className="w-6 h-6 mr-2"
-        >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L6.832 19.82a4.5 4.5 0 0 1-1.897 1.13l-2.685.8.8-2.685a4.5 4.5 0 0 1 1.13-1.897L16.863 4.487Zm0 0L19.5 7.125"
-          />
-        </svg>
-      )} */}
       {section === 'devoir' && (
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -127,9 +116,26 @@ const Sidebar = ({ activeSection, setActiveSection, handleLogout }) => {
           </button>
         ))}
       </div>
-      <button onClick={handleLogout} className="px-3 py-2 text-gray-800 rounded hover:bg-white hover:text-[#2E85B5]">
-        Logout
+      <div className='container mx-auto flex justify-center items-center'>
+      <button onClick={handleLogout} className=" mr-2 px-3 py-2 flex items-center text-red-600 rounded hover:bg-white ">
+      Logout 
+      <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            strokeWidth="1.5"
+            stroke="currentColor"
+            className="h-6 w-6 ml-2"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              d="M8.25 9V5.25A2.25 2.25 0 0 1 10.5 3h6a2.25 2.25 0 0 1 2.25 2.25v13.5A2.25 2.25 0 0 1 16.5 21h-6a2.25 2.25 0 0 1-2.25-2.25V15M12 9l3 3m0 0-3 3m3-3H2.25"
+            />
+          </svg>
+
       </button>
+      </div>
     </div>
   );
 };
@@ -149,7 +155,9 @@ export const ChCours = () => {
       <Sidebar activeSection={activeSection} setActiveSection={setActiveSection} handleLogout={handleLogout} />
 
       {/* Main Content */}
-      <div className="flex-1 p-4 bg-gray-200">
+      {/* flex-1 p-4 bg-gray-200 
+      // flex-1 p-4 bg-gray-200 ml-50 overflow-auto*/}
+      <div className="main-content">
         {activeSection === 'programme' && <Depot />}
         {activeSection === 'ressource' && <RessourcePr />}
         {activeSection === 'devoir' && <DevoirPr />}

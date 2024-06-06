@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
+import NavBar from './navbar';
 
 export const ProgrammeSt = () => {
   const { id, idmod } = useParams(); // Extract route parameters
@@ -24,7 +25,7 @@ export const ProgrammeSt = () => {
   }, [idmod]); // Dependency array with idmod to re-run when it changes
 
   if (loading) {
-    return <div>Loading...</div>; // Loading indicator while data is being fetched
+    return <div className='ml-8'>Loading...</div>; // Loading indicator while data is being fetched
   }
 
   if (error) {
@@ -36,7 +37,7 @@ export const ProgrammeSt = () => {
   }
 
   return (
-    <div className="p-6 bg-gray-100 min-h-screen">
+    <div className="p-6 bg-gray-100 min-h-screen ml-6">
       {sampleProgram.map((chapter) => (
         <div key={chapter.chapterId} className="mb-8">
           <h2 className="text-2xl font-bold text-gray-700 mb-6">{chapter.chapterName}</h2>

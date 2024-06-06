@@ -2,6 +2,7 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
+import NavBar from './navbar';
 
 export const QuizzPr = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -115,71 +116,78 @@ export const QuizzPr = () => {
   };
 
   return (
-    <div className="container mx-auto px-4">
-      <h1 className="text-3xl font-semibold mb-6">Quizzes</h1>
-      <button className="bg-blue-500 text-white font-bold py-2 px-4 rounded mb-4" onClick={() => setShowForm(!showForm)}>
+    <div>
+      <div><NavBar/></div>
+    <div className="container mx-auto px-4 bg-gray-100 min-h-screen">
+      <div className='flex mt-2'>
+      <h1 className="text-2xl font-semibold mb-6 mt-2">Quizzes</h1>
+      <button className="bg-blue-500 text-white font-bold py-2 px-4 rounded mb-4 ml-auto" onClick={() => setShowForm(!showForm)}>
         {showForm ? 'Cancel' : 'Add Quiz'}
       </button>
+      </div>
+      
       {showForm && (
         <form onSubmit={handleSubmit} className="bg-white shadow-md rounded-md p-4 mb-4">
-                   <h2 className="text-xl font-semibold mb-4">Add Quiz</h2>
-                   <div className="mb-4">
-                     <label htmlFor="titre" className="block text-gray-700 font-bold mb-2">
-                       Title
-                     </label>
-                     <input
-                       type="text"
-                       id="titre"
-                       name="titre"
-                       value={formData.titre}
-                       onChange={handleInputChange}
-                       className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                     />
-                   </div>
-                   <div className="mb-4">
-                     <h3 className="text-lg font-semibold">Questions</h3>
-                     {formData.questions.map((question, qIndex) => (
-                       <div key={qIndex} className="mb-4">
-                         <label className="block text-gray-700 font-bold mb-2">Question {qIndex + 1}</label>
-                         <input
-                           type="text"
-                           value={question.enonce}
-                           onChange={(e) => handleQuestionChange(qIndex, e)}
-                           placeholder="Enter the question statement"
-                           className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline mb-2"
-                         />
-                         {question.options.map((option, oIndex) => (
-                           <div key={oIndex} className="mb-2 flex items-center">
-                             <input
-                               type="text"
-                               value={option.name}
-                               onChange={(e) => handleOptionChange(qIndex, oIndex, e)}
-                               placeholder={`Option ${oIndex + 1}`}
-                               className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline mr-2"
-                             />
-                             <input
-                               type="radio"
-                               name={`correct-answer-${qIndex}`}
-                               checked={option.value}
-                               onChange={() => handleCorrectAnswerChange(qIndex, oIndex)}
-                             />
-                             <label className="ml-2">Correct</label>
-                           </div>
-                         ))}
-                       </div>
-                     ))}
-                     <button
-                       type="button"
-                       onClick={handleAddQuestion}
-                       className="bg-green-500 text-white font-bold py-1 px-2 rounded mb-2"
-                     >
-                       Add Question
-                     </button>
-                   </div>
-                   <button type="submit" className="bg-green-500 text-white font-bold py-2 px-4 rounded">
-                     Submit
-                   </button>
-                 </form>
+                    <h2 className="text-xl font-semibold mb-4">Add Quiz</h2>
+                    <div className="mb-4">
+                      <label htmlFor="titre" className="block text-gray-700 font-bold mb-2">
+                        Title
+                      </label>
+                      <input
+                        type="text"
+                        id="titre"
+                        name="titre"
+                        value={formData.titre}
+                        onChange={handleInputChange}
+                        className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                      />
+                    </div>
+                    <div className="mb-4">
+                      <h3 className="text-lg font-semibold">Questions</h3>
+                      {formData.questions.map((question, qIndex) => (
+                        <div key={qIndex} className="mb-4">
+                          <label className="block text-gray-700 font-bold mb-2">Question {qIndex + 1}</label>
+                          <input
+                            type="text"
+                            value={question.enonce}
+                            onChange={(e) => handleQuestionChange(qIndex, e)}
+                            placeholder="Enter the question statement"
+                            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline mb-2"
+                          />
+                          {question.options.map((option, oIndex) => (
+                            <div key={oIndex} className="mb-2 flex items-center">
+                              <input
+                                type="text"
+                                value={option.name}
+                                onChange={(e) => handleOptionChange(qIndex, oIndex, e)}
+                                placeholder={`Option ${oIndex + 1}`}
+                                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline mr-2"
+                              />
+                              <input
+                                type="radio"
+                                name={`correct-answer-${qIndex}`}
+                                checked={option.value}
+                                onChange={() => handleCorrectAnswerChange(qIndex, oIndex)}
+                              />
+                              <label className="ml-2">Correct</label>
+                            </div>
+                          ))}
+                        </div>
+                      ))}
+                      <div className=''>
+                      <button
+                        type="button"
+                        onClick={handleAddQuestion}
+                        className="bg-blue-600 text-white font-bold mt-2 py-1 px-2 rounded mb-2"
+                      >
+                        Add Question
+                      </button>
+                    </div>
+                    <button type="submit" className="bg-blue-600 ml-auto text-white font-bold py-2 px-4 rounded">
+                      Submit
+                    </button>
+                    </div>
+                  </form>
       )}
       {isLoading ? (
         <p>Loading quizzes...</p>
@@ -218,6 +226,7 @@ export const QuizzPr = () => {
           ))}
         </div>
       )}
+    </div>
     </div>
   );
 };

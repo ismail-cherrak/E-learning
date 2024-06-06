@@ -115,11 +115,10 @@
 
 
 
-
-
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
+import NavBar from './navbar';
 
 const DevoirCard = ({ devoir, onFileUpload }) => {
   const [selectedFile, setSelectedFile] = useState(null);
@@ -138,7 +137,7 @@ const DevoirCard = ({ devoir, onFileUpload }) => {
   };
 
   return (
-    <div className="bg-white shadow-md rounded-md p-4 mb-4">
+    <div className="bg-white shadow-md rounded-md p-4 mb-4 ">
       <h2 className="text-xl font-semibold mb-2">{devoir.title}</h2>
       <p className="text-gray-600 mb-2">{devoir.description}</p>
       <p className="text-gray-600 mb-2">Date de remise: {new Date(devoir.dateRemise).toLocaleDateString()}</p>
@@ -221,7 +220,7 @@ export const DevoirSt = () => {
   };
 
   return (
-    <div className="container mx-auto px-4">
+    <div className="container mx-auto px-4 ml-7 mt-5 ">
       <h1 className="text-3xl font-semibold mb-6">{isLoading ? 'Loading...' : 'Devoirs'}</h1>
       <DevoirList devoirs={devoirs} onFileUpload={handleFileUpload} />
     </div>

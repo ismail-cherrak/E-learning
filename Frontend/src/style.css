@@ -1,0 +1,27 @@
+.sidebar {
+    background-color: white; /* Change to your desired background color */
+    color: #2E85B5;
+    width: 200px;
+    height: 100vh; /* Full height */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding-top: 20px;
+    position: fixed; /* Fix the sidebar in place */
+    top: 0;
+    left: 0;
+  }
+
+  .custom-confirm-button {
+    background-color: #4169E1 !important; /* Change to your desired color */
+    color: white !important;
+  }
+  
+  .main-content {
+    margin-left: 200px; /* Adjust this value to match the width of the sidebar */
+    padding: 16px;
+    background-color: white; /* Change to your desired background color */
+    height: 100vh;
+    flex-grow: 1; /* Fill remaining space */
+  /* overflow-y: auto;  */
+  }

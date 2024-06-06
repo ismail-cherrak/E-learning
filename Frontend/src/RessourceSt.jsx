@@ -160,7 +160,7 @@ export const RessourceSt = () => {
   }, [idmod]);
 
   return (
-    <div className="container mx-auto px-4">
+    <div className="container mx-auto px-4 ml-7 mt-5">
       <h1 className="text-3xl font-semibold mb-6">{isLoading ? 'Loading...' : resources.moduleName}</h1>
       {isLoading ? (
         <p>Loading resources...</p>

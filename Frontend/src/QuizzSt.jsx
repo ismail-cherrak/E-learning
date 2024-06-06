@@ -53,7 +53,7 @@ export const QuizzSt = () => {
   };
 
   return (
-    <div className="container mx-auto px-4">
+    <div className="container mx-auto px-4 ml-4 mt-5 min-h-screen">
       <h1 className="text-3xl font-semibold mb-6">Quizzes</h1>
       {showDetails ? (
         <QuizDetails quiz={selectedQuiz} onSubmit={handleQuizSubmission} />
@@ -69,8 +69,8 @@ const QuizCard = ({ quiz, onClick }) => {
   const addedByName = addedBy ? `${addedBy.nom} ${addedBy.prenom}` : 'Unknown';
 
   return (
-    <div className="bg-white shadow-md rounded-md p-4 mb-4" key={_id}>
-      <h2 className="text-xl font-semibold mb-2">Quiz ID: {_id}</h2>
+    <div className="bg-white shadow-md rounded-md p-4 mb-4 ml-5 " key={_id}>
+      {/* <h2 className="text-xl font-semibold mb-2">Quiz ID: {_id}</h2> */}
       <h2 className="text-xl font-semibold mb-2">{titre}</h2>
       <p className="text-gray-600 mb-2">Added by: {addedBy && addedBy.nom && addedBy.prenom ? addedByName : 'Unknown'}</p>
       <p className="text-gray-600 mb-2">Date: {new Date(dateDepot).toLocaleDateString()}</p>
@@ -105,10 +105,10 @@ const QuizDetails = ({ quiz, onSubmit }) => {
   };
 
   return (
-    <div className="bg-white shadow-md rounded-md p-4 mb-4">
-      <h2 className="text-xl font-semibold mb-4">Quiz ID: {quiz._id}</h2>
+    <div className=" shadow-md rounded-md p-4 mb-4  bg-gray-100 min-h-screen ml-10">
+      {/* <h2 className="text-xl font-semibold mb-4">Quiz ID: {quiz._id}</h2> */}
       {quiz.questions.map((question, questionIndex) => (
-        <div key={question._id} className="mb-4">
+        <div key={question._id} className="mb-4 ">
           <p className="font-semibold">{question.enonce}</p>
           <div className="ml-4">
             {question.options.map((option, optionIndex) => (

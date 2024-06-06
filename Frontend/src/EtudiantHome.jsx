@@ -34,7 +34,7 @@ export const EtudiantHome = () => {
   };
 
   return (
-    <div className="flex flex-col h-screen bg-gray-200">
+    <div className="flex flex-col min-h-screen bg-gray-200">
       <div className="h-20 flex items-center justify-between px-4 bg-blue-500"> 
         <div className="flex items-center"> 
           <div className="bg-gray-500 rounded-lg p-2 flex items-center justify-center mr-2"> 
@@ -55,11 +55,11 @@ export const EtudiantHome = () => {
               className="flex flex-col items-center bg-white rounded-lg p-4 shadow-md hover:shadow-lg transition-shadow duration-300" 
               onClick={() => handleRedirect(module._id)} // Change redirect function
             >
-              <img 
+              {/* <img 
                 src={module.iconUrl} 
                 alt={module.name} // Use module.name instead of module.nom
                 className="w-20 h-20 mb-2 rounded-full object-cover" 
-              />
+              /> */}
               <p className="text-center text-lg font-semibold">{module.name}</p> {/* Use module.name */}
             </div>
           ))
