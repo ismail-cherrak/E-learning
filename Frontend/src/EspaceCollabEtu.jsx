@@ -974,6 +974,7 @@ export const EspaceCollabEtu = ( { comments = [] }   , postId, onDeleteComment )
 
         setPosts([...posts, newPost]);
         setPostText('');
+        window.location.reload()
       } catch (error) {
         console.error('Error posting:', error);
       }

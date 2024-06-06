@@ -50,7 +50,7 @@ export const ProgrammeSt = () => {
                   key={card.cardId}
                   className="bg-white p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300 w-full"
                 >
-                  <h3 className="text-lg font-semibold text-gray-700">Card {card.cardId}</h3>
+                  {/* <h3 className="text-lg font-semibold text-gray-700">Card {car</h3> */}
                   {card.files.length === 0 ? (
                     <p className="text-gray-500">No files in this card.</p>
                   ) : (
